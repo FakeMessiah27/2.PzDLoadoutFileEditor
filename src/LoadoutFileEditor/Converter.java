@@ -24,7 +24,7 @@ class Converter {
         File[] files = folder.listFiles();
 
         if (files != null) {
-            IConversionLanguage language;
+            ConverterGeneral converterGeneral;
 
             for (File f : files) {
                 String fileName = f.getAbsolutePath();
@@ -36,25 +36,25 @@ class Converter {
                 }
                 else if (extension.equals("sqe")) { // If a file is found, ensure it is a .sqe file and perform the correct conversion on it
                     if (parent.getName().contains("WHR") || parent.getName().contains("FSJ") || parent.getName().contains("DAK")) { // German files
-                        language = new ConverterGerman(controller);
-                        language.replaceStrings(f);
+                        converterGeneral = new ConverterGerman(controller);
+                        ((ConverterGerman)converterGeneral).replaceStrings(f);
                     }
                     else if (parent.getName().contains("USAB") || parent.getName().contains("US")) { // American files
-                        language = new ConverterAmerican(controller);
-                        language.replaceStrings(f);
+                        converterGeneral = new ConverterAmerican(controller);
+                        ((ConverterAmerican)converterGeneral).replaceStrings(f);
                     }
                     else if (parent.getName().contains("Rus")) { // Russian files
-                        language = new ConverterRussian(controller);
-                        language.replaceStrings(f);
+                        converterGeneral = new ConverterRussian(controller);
+                        ((ConverterRussian)converterGeneral).replaceStrings(f);
                     }
                     else if (parent.getName().contains("NKVD")) { // NKVD files
-                        language = new ConverterNKVD(controller);
-                        language.replaceStrings(f);
+                        converterGeneral = new ConverterNKVD(controller);
+                        ((ConverterNKVD)converterGeneral).replaceStrings(f);
                     }
                     else if (parent.getName().contains("CdnRWR") || parent.getName().contains("CdnBCR")
                             || parent.getName().contains("UKEsx") || parent.getName().contains("UK")) { // Commonwealth files
-                        language = new ConverterCommonwealth(controller);
-                        language.replaceStrings(f);
+                        converterGeneral = new ConverterCommonwealth(controller);
+                        ((ConverterCommonwealth)converterGeneral).replaceStrings(f);
                     }
                 }
             }
