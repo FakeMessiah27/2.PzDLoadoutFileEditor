@@ -70,34 +70,13 @@ class ConverterAmerican extends ConverterGeneral {
                 }
                 else if (oldLine.contains("1 Platoon")) {
                     if (oldLine.contains("1 Squad")) {
-                        if (oldLine.contains("Alpha"))
-                            newLine = changeLine(oldLine, 1, 1, "Alpha");
-                        else if (oldLine.contains("Bravo"))
-                            newLine = changeLine(oldLine, 1, 1, "Bravo");
-                        else if (oldLine.contains("Charlie"))
-                            newLine = changeLine(oldLine, 1, 1, "Charlie");
-                        else
-                            newLine = changeLine(oldLine, 1, 1);
+                        newLine = changeLine(oldLine, 1, 1);
                     }
                     else if (oldLine.contains("2 Squad")) {
-                        if (oldLine.contains("Alpha"))
-                            newLine = changeLine(oldLine, 1, 2, "Alpha");
-                        else if (oldLine.contains("Bravo"))
-                            newLine = changeLine(oldLine, 1, 2, "Bravo");
-                        else if (oldLine.contains("Charlie"))
-                            newLine = changeLine(oldLine, 1, 2, "Charlie");
-                        else
-                            newLine = changeLine(oldLine, 1, 2);
+                        newLine = changeLine(oldLine, 1, 2);
                     }
                     else if (oldLine.contains("3 Squad")) {
-                        if (oldLine.contains("Alpha"))
-                            newLine = changeLine(oldLine, 1, 3, "Alpha");
-                        else if (oldLine.contains("Bravo"))
-                            newLine = changeLine(oldLine, 1, 3, "Bravo");
-                        else if (oldLine.contains("Charlie"))
-                            newLine = changeLine(oldLine, 1, 3, "Charlie");
-                        else
-                            newLine = changeLine(oldLine, 1, 3);
+                        newLine = changeLine(oldLine, 1, 3);
                     }
                     else
                         newLine = changeLine(oldLine, 1);
@@ -107,34 +86,13 @@ class ConverterAmerican extends ConverterGeneral {
                 }
                 else if (oldLine.contains("2 Platoon")) {
                     if (oldLine.contains("1 Squad")) {
-                        if (oldLine.contains("Alpha"))
-                            newLine = changeLine(oldLine, 2, 1, "Alpha");
-                        else if (oldLine.contains("Bravo"))
-                            newLine = changeLine(oldLine, 2, 1, "Bravo");
-                        else if (oldLine.contains("Charlie"))
-                            newLine = changeLine(oldLine, 2, 1, "Charlie");
-                        else
-                            newLine = changeLine(oldLine, 2, 1);
+                        newLine = changeLine(oldLine, 2, 1);
                     }
                     else if (oldLine.contains("2 Squad")) {
-                        if (oldLine.contains("Alpha"))
-                            newLine = changeLine(oldLine, 2, 2, "Alpha");
-                        else if (oldLine.contains("Bravo"))
-                            newLine = changeLine(oldLine, 2, 2, "Bravo");
-                        else if (oldLine.contains("Charlie"))
-                            newLine = changeLine(oldLine, 2, 2, "Charlie");
-                        else
-                            newLine = changeLine(oldLine, 2, 2);
+                        newLine = changeLine(oldLine, 2, 2);
                     }
                     else if (oldLine.contains("3 Squad")) {
-                        if (oldLine.contains("Alpha"))
-                            newLine = changeLine(oldLine, 2, 3, "Alpha");
-                        else if (oldLine.contains("Bravo"))
-                            newLine = changeLine(oldLine, 2, 3, "Bravo");
-                        else if (oldLine.contains("Charlie"))
-                            newLine = changeLine(oldLine, 2, 3, "Charlie");
-                        else
-                            newLine = changeLine(oldLine, 2, 3);
+                        newLine = changeLine(oldLine, 2, 3);
                     }
                     else
                         newLine = changeLine(oldLine, 2);
@@ -149,6 +107,11 @@ class ConverterAmerican extends ConverterGeneral {
                 }
                 else if (oldLine.contains("Mortar Team")) {
                     newLine = changeLine(oldLine, "Mortar Team");
+                    fileContent.set(i, newLine);
+                    altered = true;
+                }
+                else if (oldLine.contains("Bazooka Team")) {
+                    newLine = changeLine(oldLine, "Bazooka Team");
                     fileContent.set(i, newLine);
                     altered = true;
                 }
@@ -194,16 +157,9 @@ class ConverterAmerican extends ConverterGeneral {
                 String.format("\"%1$s@%2$d Platoon | Platoon HQ", role, platoon)).toString();
     }
 
-    // Changes line to new Squad (with team) string
-    private String changeLine(String line, int platoon, int squad, String team) {
-        String role = getRole(line);
-        return new StringBuilder(line).replace(line.indexOf("\""), line.lastIndexOf("\""),
-                String.format("\"%1$s@%2$d Platoon | %3$d Squad | %4$s Team", role, platoon, squad, team)).toString();
-    }
-
     // Change line to the new squad string
     private String changeLine(String line, int platoon, int squad) {
-        String role = getRole(line);
+        String role = getRole(line, true);
         return new StringBuilder(line).replace(line.indexOf("\""), line.lastIndexOf("\""),
                 String.format("\"%1$s@%2$d Platoon | %3$d Squad", role, platoon, squad)).toString();
     }

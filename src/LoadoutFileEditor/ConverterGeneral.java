@@ -52,6 +52,18 @@ class ConverterGeneral {
         }
     }
 
+    // Same as the above, but for nations who use teams inside of a squad
+    String getRole(String line, boolean hasTeam) {
+        if (line.contains("|")) {
+            String reverseOldLine = new StringBuilder(line).reverse().toString();
+            String reserveRole = reverseOldLine.substring(2, reverseOldLine.indexOf("|", reverseOldLine.indexOf("|") + 1) - 1);
+            return new StringBuilder(reserveRole).reverse().toString();
+        }
+        else {
+            return new StringBuilder(line).substring(line.indexOf("\"") + 1, line.lastIndexOf("\""));
+        }
+    }
+
     // Increases the file counter in the UI
     void increaseFileCount() {
         Platform.runLater(new Runnable() {

@@ -44,34 +44,19 @@ class ConverterNKVD extends ConverterGeneral {
                 //              1st Team
                 //              2nd Team
                 if (oldLine.contains("1st Squad")) {
-                    if (oldLine.contains("1st Team"))
-                        newLine = changeLine(oldLine,"1st", "1st");
-                    else if (oldLine.contains("2nd Team"))
-                        newLine = changeLine(oldLine,"1st", "2nd");
-                    else
-                        newLine = changeLine(oldLine,"1st");
+                    newLine = changeLine(oldLine,"1st");
 
                     fileContent.set(i, newLine);
                     altered = true;
                 }
                 else if (oldLine.contains("2nd Squad")) {
-                    if (oldLine.contains("1st Team"))
-                        newLine = changeLine(oldLine,"2nd", "1st");
-                    else if (oldLine.contains("2nd Team"))
-                        newLine = changeLine(oldLine,"2nd", "2nd");
-                    else
-                        newLine = changeLine(oldLine,"2nd");
+                    newLine = changeLine(oldLine,"2nd");
 
                     fileContent.set(i, newLine);
                     altered = true;
                 }
                 else if (oldLine.contains("3rd Squad")) {
-                    if (oldLine.contains("1st Team"))
-                        newLine = changeLine(oldLine,"3rd", "1st");
-                    else if (oldLine.contains("2nd Team"))
-                        newLine = changeLine(oldLine,"3rd", "2nd");
-                    else
-                        newLine = changeLine(oldLine,"3rd");
+                    newLine = changeLine(oldLine,"3rd");
 
                     fileContent.set(i, newLine);
                     altered = true;
@@ -105,16 +90,9 @@ class ConverterNKVD extends ConverterGeneral {
                 String.format("\"%1$s@Platoon HQ", role)).toString();
     }
 
-    // Changes line to new Squad (with team) string
-    private String changeLine(String line, String squad, String team) {
-        String role = getRole(line);
-        return new StringBuilder(line).replace(line.indexOf("\""), line.lastIndexOf("\""),
-                String.format("\"%1$s@%2$s Squad | %3$s Team", role, squad, team)).toString();
-    }
-
     // Change line to the new squad string
     private String changeLine(String line, String squad) {
-        String role = getRole(line);
+        String role = getRole(line, true);
         return new StringBuilder(line).replace(line.indexOf("\""), line.lastIndexOf("\""),
                 String.format("\"%1$s@%2$s Squad", role, squad)).toString();
     }

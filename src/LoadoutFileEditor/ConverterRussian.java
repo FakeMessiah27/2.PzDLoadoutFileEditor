@@ -62,28 +62,13 @@ class ConverterRussian extends ConverterGeneral {
                 }
                 else if (oldLine.contains("1 Platoon")) {
                     if (oldLine.contains("1st Squad")) {
-                        if (oldLine.contains("1st Team"))
-                            newLine = changeLine(oldLine, 1, "1st", "1st");
-                        else if (oldLine.contains("2nd Team"))
-                            newLine = changeLine(oldLine, 1, "1st", "2nd");
-                        else
-                            newLine = changeLine(oldLine, 1, "1st");
+                        newLine = changeLine(oldLine, 1, "1st");
                     }
                     else if (oldLine.contains("2nd Squad")) {
-                        if (oldLine.contains("1st Team"))
-                            newLine = changeLine(oldLine, 1, "2nd", "1st");
-                        else if (oldLine.contains("2nd Team"))
-                            newLine = changeLine(oldLine, 1, "2nd", "2nd");
-                        else
-                            newLine = changeLine(oldLine, 1, "2nd");
+                        newLine = changeLine(oldLine, 1, "2nd");
                     }
                     else if (oldLine.contains("3rd Squad")) {
-                        if (oldLine.contains("1st Team"))
-                            newLine = changeLine(oldLine, 1, "3rd", "1st");
-                        else if (oldLine.contains("2nd Team"))
-                            newLine = changeLine(oldLine, 1, "3rd", "2nd");
-                        else
-                            newLine = changeLine(oldLine, 1, "3rd");
+                        newLine = changeLine(oldLine, 1, "3rd");
                     }
                     else
                         newLine = changeLine(oldLine, 1);
@@ -93,28 +78,13 @@ class ConverterRussian extends ConverterGeneral {
                 }
                 else if (oldLine.contains("2 Platoon")) {
                     if (oldLine.contains("1st Squad")) {
-                        if (oldLine.contains("1st Team"))
-                            newLine = changeLine(oldLine, 2, "1st", "1st");
-                        else if (oldLine.contains("2nd Team"))
-                            newLine = changeLine(oldLine, 2, "1st", "2nd");
-                        else
-                            newLine = changeLine(oldLine, 2, "1st");
+                        newLine = changeLine(oldLine, 2, "1st");
                     }
                     else if (oldLine.contains("2nd Squad")) {
-                        if (oldLine.contains("1st Team"))
-                            newLine = changeLine(oldLine, 2, "2nd", "1st");
-                        else if (oldLine.contains("2nd Team"))
-                            newLine = changeLine(oldLine, 2, "2nd", "2nd");
-                        else
-                            newLine = changeLine(oldLine, 2, "2nd");
+                        newLine = changeLine(oldLine, 2, "2nd");
                     }
                     else if (oldLine.contains("3rd Squad")) {
-                        if (oldLine.contains("1st Team"))
-                            newLine = changeLine(oldLine, 2, "3rd", "1st");
-                        else if (oldLine.contains("2nd Team"))
-                            newLine = changeLine(oldLine, 2, "3rd", "2nd");
-                        else
-                            newLine = changeLine(oldLine, 2, "3rd");
+                        newLine = changeLine(oldLine, 2, "3rd");
                     }
                     else
                         newLine = changeLine(oldLine, 2);
@@ -164,16 +134,9 @@ class ConverterRussian extends ConverterGeneral {
                 String.format("\"%1$s@%2$d Platoon | Platoon HQ", role, platoon)).toString();
     }
 
-    // Changes line to new Squad (with team) string
-    private String changeLine(String line, int platoon, String squad, String team) {
-        String role = getRole(line);
-        return new StringBuilder(line).replace(line.indexOf("\""), line.lastIndexOf("\""),
-                String.format("\"%1$s@%2$d Platoon | %3$s Squad | %4$s Team", role, platoon, squad, team)).toString();
-    }
-
     // Change line to the new squad string
     private String changeLine(String line, int platoon, String squad) {
-        String role = getRole(line);
+        String role = getRole(line, true);
         return new StringBuilder(line).replace(line.indexOf("\""), line.lastIndexOf("\""),
                 String.format("\"%1$s@%2$d Platoon | %3$s Squad", role, platoon, squad)).toString();
     }
